@@ -1,2 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,500;0,600;0,900;1,300;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400;1,500;1,700&display=swap");
 * {
-  background-color: olive; }
+  background-color: lightblue; }
+
+.titulo {
+  text-align: center;
+  font-family: 'Lora', serif;
+  color: orange;
+  margin-top: 200px; }
+
+.tituloResaltado {
+  font-family: 'Montserrat Alternates', sans-serif; }
+
+.instrucciones {
+  margin: 50px 30%; }
