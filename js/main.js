@@ -3,9 +3,32 @@
 /*-----------------------------------------------------------------------------*/
 
 
-//1- Pedir al usuario que elija un producto de la lista ingresando el número correspondiente
+// Crear una clase constructora 
 
-let elegir = prompt ("¡Bienvenido a Electrodomésticos al descuento! \n" + "Ingresa el número correspondiente al producto que desea comprar:\n" + "1- Aire Acondicionado\n" + "2- Heladera\n" + "3- Lavarropas");
+class Producto {
+    constructor (nombre, marca, color, precio) {
+        this.nombre = nombre;
+        this.marca = marca;
+        this.color = color;
+        this.precio = precio;
+    }
+}
+
+
+//Creación de objetos
+
+const producto1 = new Producto ("Aire Acondicionado", "Samsung", "Gris", 75000 );
+
+const producto2 = new Producto ("Heladera", "Gafa", "Negra", 53000 );
+
+const producto3 = new Producto ("Lavarropas", "LG", "Negro", 60000 );
+
+
+
+
+// Pedir al usuario que elija un producto de la lista ingresando el número correspondiente
+
+let elegir = prompt ("¡Bienvenido a Electrodomésticos al descuento! \n" + "Ingresa el número correspondiente al producto que desea comprar:\n" + "1- " + producto1.nombre + "\n" + "2- " + producto2.nombre + "\n" + "3- " + producto3.nombre);
 
 //2- Imprimir por consola la confirmación de la elección y su precio
 
@@ -13,16 +36,16 @@ let precio=0;
 
 switch (elegir) {
     case "1":
-        console.log("Usted comprará un Aire Acondicionado");
-        precio = 56000;
+        console.log("Usted comprará un(a) " + producto1.nombre + ", marca " + producto1.marca + ", color " + producto1.color);
+        precio = producto1.precio;
         break;
     case "2":
-        console.log("Usted comprará una heladera");
-        precio = 30000;
+        console.log("Usted comprará un(a) " + producto2.nombre + ", marca " + producto2.marca + ", color " + producto2.color);
+        precio = producto2.precio;
         break;
     case "3":
-        console.log("Usted comprará un Lavarropas");
-        precio = 25000;
+        console.log("Usted comprará un(a) " + producto3.nombre + ", marca " + producto3.marca + ", color " + producto3.color);
+        precio = producto3.precio;
         break;
 
     default:
@@ -86,9 +109,9 @@ let formaDePago = prompt ("Indique la forma en la que desea pagar: \n" + "1-Efec
 
 let cuotas = 0;
 
-if (formaDePago==1) {
+if (formaDePago==="1") {
     console.log("Dirijase a caja para efectuar el pago");
-}else if (formaDePago==2) {
+}else if (formaDePago==="2") {
     cuotas=parseInt(prompt("Ingrese la cantidad de cuotas en las que desea pagar (Máximo 6)"));
 } else {
     console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
@@ -100,8 +123,10 @@ function valorCuota (precioConDescuento, cuotas) {
     return (precioConDescuento/cuotas);
 };
 
-if (formaDePago==2) {
+if ((formaDePago==="2") && (cuotas>0)) {
     console.log("Usted va a pagar " + cuotas + " cuotas de $" + valorCuota (precioConDescuento, cuotas));
+    console.log("¡Gracias por su compra!");
+}else {
+    console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
 }
 
-console.log("¡Gracias por su compra!");
