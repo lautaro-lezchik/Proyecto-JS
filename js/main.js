@@ -71,6 +71,27 @@ switch (elegir) {
 console.log("El precio de lista de este producto es: $" + precio);
 
 
+// Si el producto debe ser enviado a domicilio se le aplica un recargo
+
+let costoDeEnvio = 750;
+
+let envio = prompt("Si:\n\n-desea que le enviemos el producto a su domicilio: presione 1 (se aplicará un recargo de $" + costoDeEnvio + ")\n\n-lo va a retirar en la tienda: presione 2");
+
+switch (envio) {
+    case "1":
+        precioFinal.push(costoDeEnvio);
+        console.log("El producto será enviado a su domicilio");
+        break;
+    
+    case "2":
+        console.log("El producto está listo para retirar en la tienda");
+        break;
+
+        default:
+            alert("No ha elegido una opción válida. Por favor recarge la página y vuelva a comenzar")
+            break;
+}
+
 // Calculo la suma de todos los elementos del array precioFinal
 
 
@@ -149,10 +170,13 @@ function valorCuota (precioConDescuento, cuotas) {
     return (precioConDescuento/cuotas);
 };
 
-if ((formaDePago==="2") && (cuotas>0)) {
-    console.log("Usted va a pagar " + cuotas + " cuotas de $" + valorCuota (precioConDescuento, cuotas));
+if (formaDePago==="2") { 
+    if((cuotas>0) && (cuotas<=6)) {
+        console.log("Usted va a pagar " + cuotas + " cuotas de $" + valorCuota (precioConDescuento, cuotas));
+        console.log("¡Gracias por su compra!");
+    }else {
+        console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
+    } 
+} else {
     console.log("¡Gracias por su compra!");
-}else {
-    console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
 }
-
