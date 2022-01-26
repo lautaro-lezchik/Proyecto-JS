@@ -24,13 +24,19 @@ const producto2 = new Producto ("Heladera", "Gafa", "Negra", 53000 );
 const producto3 = new Producto ("Lavarropas", "LG", "Negro", 60000 );
 
 
+// Creación del carrito de compras y de precio final
+
+const carritoDeCompras = [];
+
+const precioFinal = [];
+
 
 
 // Pedir al usuario que elija un producto de la lista ingresando el número correspondiente
 
 let elegir = prompt ("¡Bienvenido a Electrodomésticos al descuento! \n" + "Ingresa el número correspondiente al producto que desea comprar:\n" + "1- " + producto1.nombre + "\n" + "2- " + producto2.nombre + "\n" + "3- " + producto3.nombre);
 
-//2- Imprimir por consola la confirmación de la elección y su precio
+//2- Imprimir por consola la confirmación de la elección y su precio, y agregar el producto al carrito
 
 let precio=0;
 
@@ -38,14 +44,23 @@ switch (elegir) {
     case "1":
         console.log("Usted comprará un(a) " + producto1.nombre + ", marca " + producto1.marca + ", color " + producto1.color);
         precio = producto1.precio;
+        carritoDeCompras.push(producto1);
+        precioFinal.push(producto1["precio"]);
+        console.log("El producto ha sido agregado al carrito");
         break;
     case "2":
         console.log("Usted comprará un(a) " + producto2.nombre + ", marca " + producto2.marca + ", color " + producto2.color);
         precio = producto2.precio;
+        carritoDeCompras.push(producto2);
+        precioFinal.push(producto2["precio"]);
+        console.log("El producto ha sido agregado al carrito");
         break;
     case "3":
         console.log("Usted comprará un(a) " + producto3.nombre + ", marca " + producto3.marca + ", color " + producto3.color);
         precio = producto3.precio;
+        carritoDeCompras.push(producto3);
+        precioFinal.push(producto3["precio"]);
+        console.log("El producto ha sido agregado al carrito");
         break;
 
     default:
@@ -55,7 +70,17 @@ switch (elegir) {
 
 console.log("El precio de lista de este producto es: $" + precio);
 
-// 3- Obtener el día de la semana real para aplicar descuentos
+
+// Calculo la suma de todos los elementos del array precioFinal
+
+
+let total = precioFinal.reduce((a, b) => a + b, 0);
+
+console.log("El total del carrito es: $" + total);
+
+
+
+// Obtener el día de la semana real para aplicar descuentos
 
 const day = new Date();
 let diaDeLaSemana = day.getDay();
@@ -94,9 +119,10 @@ switch (diaDeLaSemana) {
     
 };
 
-//4- Calculo el precio nuevo aplicando el descuento
 
-let precioConDescuento = ((100-descuento)*precio)/100;
+// Calculo el precio nuevo aplicando el descuento
+
+let precioConDescuento = ((100-descuento)*total)/100;
 
 
 
