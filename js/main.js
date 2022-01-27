@@ -31,44 +31,45 @@ const carritoDeCompras = [];
 const precioFinal = [];
 
 
+// Creo bucle para agregar productos al carrito
 
-// Pedir al usuario que elija un producto de la lista ingresando el número correspondiente
-
-let elegir = prompt ("¡Bienvenido a Electrodomésticos al descuento! \n" + "Ingresa el número correspondiente al producto que desea comprar:\n" + "1- " + producto1.nombre + "\n" + "2- " + producto2.nombre + "\n" + "3- " + producto3.nombre);
-
-//2- Imprimir por consola la confirmación de la elección y su precio, y agregar el producto al carrito
+function elegir() {
+    return (prompt ("Ingresa el número correspondiente al producto que desea comprar:\n" + "1- " + producto1.nombre + "\n" + "2- " + producto2.nombre + "\n" + "3- " + producto3.nombre));
+};
 
 let precio=0;
 
-switch (elegir) {
-    case "1":
-        console.log("Usted comprará un(a) " + producto1.nombre + ", marca " + producto1.marca + ", color " + producto1.color);
-        precio = producto1.precio;
-        carritoDeCompras.push(producto1);
-        precioFinal.push(producto1["precio"]);
-        console.log("El producto ha sido agregado al carrito");
-        break;
-    case "2":
-        console.log("Usted comprará un(a) " + producto2.nombre + ", marca " + producto2.marca + ", color " + producto2.color);
-        precio = producto2.precio;
-        carritoDeCompras.push(producto2);
-        precioFinal.push(producto2["precio"]);
-        console.log("El producto ha sido agregado al carrito");
-        break;
-    case "3":
-        console.log("Usted comprará un(a) " + producto3.nombre + ", marca " + producto3.marca + ", color " + producto3.color);
-        precio = producto3.precio;
-        carritoDeCompras.push(producto3);
-        precioFinal.push(producto3["precio"]);
-        console.log("El producto ha sido agregado al carrito");
-        break;
-
-    default:
-        alert("No ha elegido un producto. Por favor recarge la página")
-        break;
+function continuarAgregando() {
+    return (prompt ("¿Desea agregar más productos al carrito?\nSi: Presione 1\nNo: Presione 2 "));
 };
 
-console.log("El precio de lista de este producto es: $" + precio);
+do {
+    switch (elegir()) {
+        case "1":
+            console.log(`Usted comprará un(a) ${producto1.nombre}, marca ${producto1.marca}, color ${producto1.color}, a un precio de $${producto1.precio}`);
+            precio = producto1.precio;
+            carritoDeCompras.push(producto1);
+            precioFinal.push(producto1["precio"]);
+            break;
+        case "2":
+            console.log(`Usted comprará un(a) ${producto2.nombre}, marca ${producto2.marca}, color ${producto2.color}, a un precio de $${producto2.precio}`);
+            precio = producto2.precio;
+            carritoDeCompras.push(producto2);
+            precioFinal.push(producto2["precio"]);
+            break;
+        case "3":
+            console.log(`Usted comprará un(a) ${producto3.nombre}, marca ${producto3.marca}, color ${producto3.color}, a un precio de $${producto3.precio}`);
+            precio = producto3.precio;
+            carritoDeCompras.push(producto3);
+            precioFinal.push(producto3["precio"]);
+            break;
+    
+        default:
+            alert("No ha elegido un producto. Por favor recarge la página")
+            break;
+    };
+    
+} while (continuarAgregando()=="1");
 
 
 // Si el producto debe ser enviado a domicilio se le aplica un recargo
@@ -80,7 +81,7 @@ let envio = prompt("Si:\n\n-desea que le enviemos el producto a su domicilio: pr
 switch (envio) {
     case "1":
         precioFinal.push(costoDeEnvio);
-        console.log("El producto será enviado a su domicilio");
+        console.log(`El precio del envío es de $${costoDeEnvio}`);
         break;
     
     case "2":
@@ -97,7 +98,7 @@ switch (envio) {
 
 let total = precioFinal.reduce((a, b) => a + b, 0);
 
-console.log("El total del carrito es: $" + total);
+console.log(`El total del carrito con ${carritoDeCompras.length} producto(s) es de: $${total}`);
 
 
 
@@ -147,7 +148,7 @@ let precioConDescuento = ((100-descuento)*total)/100;
 
 
 
-console.log("El precio con el descuento aplicado es de $" + precioConDescuento );
+console.log(`El precio con el descuento aplicado es de $${precioConDescuento}`);
 
 
 //5- Determinar forma de pago
@@ -172,7 +173,7 @@ function valorCuota (precioConDescuento, cuotas) {
 
 if (formaDePago==="2") { 
     if((cuotas>0) && (cuotas<=6)) {
-        console.log("Usted va a pagar " + cuotas + " cuotas de $" + valorCuota (precioConDescuento, cuotas));
+        console.log(`Usted va a pagar ${cuotas} cuotas de $${valorCuota (precioConDescuento, cuotas)}`);
         console.log("¡Gracias por su compra!");
     }else {
         console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
@@ -180,3 +181,4 @@ if (formaDePago==="2") {
 } else {
     console.log("¡Gracias por su compra!");
 }
+
