@@ -6,22 +6,23 @@
 // Crear una clase constructora 
 
 class Producto {
-    constructor (nombre, marca, color, precio) {
+    constructor (nombre, marca, color, precio, codigo) {
         this.nombre = nombre;
         this.marca = marca;
         this.color = color;
         this.precio = precio;
+        this.codigo = codigo;
     }
 }
 
 
 //Creación de objetos
 
-const producto1 = new Producto ("Aire Acondicionado", "Samsung", "Gris", 75000 );
+const producto1 = new Producto ("Aire Acondicionado", "Samsung", "Gris", 75000, "aa1" );
 
-const producto2 = new Producto ("Heladera", "Gafa", "Negra", 53000 );
+const producto2 = new Producto ("Heladera", "Gafa", "Negra", 53000, "he1" );
 
-const producto3 = new Producto ("Lavarropas", "LG", "Negro", 60000 );
+const producto3 = new Producto ("Lavarropas", "LG", "Negro", 60000, "la1" );
 
 
 // Creación del carrito de compras y de precio final
@@ -165,20 +166,81 @@ if (formaDePago==="1") {
     console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
 };
 
-//6- Calculo el valor de cada cuota
+// Calculo el valor de cada cuota
 
 function valorCuota (precioConDescuento, cuotas) {
     return (precioConDescuento/cuotas);
 };
 
+let redondeoCuota = (valorCuota (precioConDescuento, cuotas)).toFixed(2)
+
 if (formaDePago==="2") { 
     if((cuotas>0) && (cuotas<=6)) {
-        console.log(`Usted va a pagar ${cuotas} cuotas de $${valorCuota (precioConDescuento, cuotas)}`);
-        console.log("¡Gracias por su compra!");
+        console.log(`Usted va a pagar ${cuotas} cuotas de $${redondeoCuota}`);
     }else {
         console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
     } 
-} else {
-    console.log("¡Gracias por su compra!");
 }
+
+
+//Ordeno los productos para mostrar en el carrito
+
+let carritoOrdenado = carritoDeCompras.sort((a, b) => {
+    if (a.nombre > b.nombre) {
+        return 1;
+    }
+    if (a.nombre < b.nombre) {
+        return -1;
+    }
+    // a es igual a b
+    return 0;
+});
+
+
+// Muestro resumen (factura) de compra (Esto se mostraría en la pantalla final, como confirmación y resumen de la compra)
+
+
+// Creo array con los códigos para luego verificar productos repetidos
+
+const nombresDeProductos = carritoOrdenado.map((el) => el.codigo)
+
+
+//Verifico productos repetidos
+const verificarRepetidos = {};
+nombresDeProductos.forEach(function (x) { verificarRepetidos[x] = (verificarRepetidos[x] || 0) + 1; });
+
+
+//creo array solo con los códigos de producto
+arrayCodigos = Object.keys(verificarRepetidos);
+
+
+// Imprimo ticket de Compra
+
+console.log(`Ticket de compra\n\nUsted compró:\n`);
+
+for (let cantidad in verificarRepetidos) {
+
+    var i = Object.keys(verificarRepetidos).indexOf(cantidad);
+
+    let obtengoCodigo = arrayCodigos[i];
+
+    let traerProducto = carritoDeCompras.find((el) => el.codigo === obtengoCodigo);
+
+    console.log(
+        `${verificarRepetidos[cantidad]} ${traerProducto.nombre}(s) ${traerProducto.marca}`
+        );
+};
+
+
+console.log(`El precio total de la compra es de $${precioConDescuento}`);
+
+if (formaDePago==="2") { 
+    if((cuotas>0) && (cuotas<=6)) {
+        console.log(`Usted va a pagar ${cuotas} cuotas de $${redondeoCuota}`);
+        console.log("¡Gracias por su compra!");
+    }
+} else if (formaDePago==="1") {
+    console.log(`Usted va a pagar en efectivo por caja`);
+    console.log("¡Gracias por su compra!");
+};
 
