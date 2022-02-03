@@ -1,16 +1,51 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,500;0,600;0,900;1,300;1,500;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400;1,500;1,700&display=swap");
 * {
-  background-color: lightblue; }
+  background-color: white;
+  margin: 0;
+  padding: 0; }
 
 .titulo {
   text-align: center;
   font-family: 'Lora', serif;
-  color: orange;
-  margin-top: 200px; }
+  color: orange; }
 
 .tituloResaltado {
   font-family: 'Montserrat Alternates', sans-serif; }
 
-.instrucciones {
-  margin: 50px 30%; }
+.tituloResumen {
+  text-align: center;
+  font-family: 'Lora', serif;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  border-top: 2px solid gray;
+  padding-top: 20px; }
+
+.descuentoDelDia {
+  border: 2px solid blue;
+  margin: 10px 20px 0 0; }
+
+.header {
+  background-color: orange;
+  border-bottom: 3px solid seagreen;
+  height: 300px; }
+
+.contenedorResumen {
+  display: flex; }
+
+.tablaResumen {
+  margin: auto; }
+
+.colCart {
+  width: 40vw; }
+
+.alignCenter {
+  text-align: center; }
+
+.precioTotal {
+  color: slateblue;
+  font-weight: 700; }
+
+.pagoEnCuotas {
+  color: darkgreen;
+  font-weight: 600; }

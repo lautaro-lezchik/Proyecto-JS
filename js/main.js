@@ -25,6 +25,7 @@ const producto2 = new Producto ("Heladera", "Gafa", "Negra", 53000, "he1" );
 const producto3 = new Producto ("Lavarropas", "LG", "Negro", 60000, "la1" );
 
 
+
 // Creación del carrito de compras y de precio final
 
 const carritoDeCompras = [];
@@ -47,19 +48,16 @@ function continuarAgregando() {
 do {
     switch (elegir()) {
         case "1":
-            console.log(`Usted comprará un(a) ${producto1.nombre}, marca ${producto1.marca}, color ${producto1.color}, a un precio de $${producto1.precio}`);
             precio = producto1.precio;
             carritoDeCompras.push(producto1);
             precioFinal.push(producto1["precio"]);
             break;
         case "2":
-            console.log(`Usted comprará un(a) ${producto2.nombre}, marca ${producto2.marca}, color ${producto2.color}, a un precio de $${producto2.precio}`);
             precio = producto2.precio;
             carritoDeCompras.push(producto2);
             precioFinal.push(producto2["precio"]);
             break;
         case "3":
-            console.log(`Usted comprará un(a) ${producto3.nombre}, marca ${producto3.marca}, color ${producto3.color}, a un precio de $${producto3.precio}`);
             precio = producto3.precio;
             carritoDeCompras.push(producto3);
             precioFinal.push(producto3["precio"]);
@@ -77,12 +75,11 @@ do {
 
 let costoDeEnvio = 750;
 
-let envio = prompt("Si:\n\n-desea que le enviemos el producto a su domicilio: presione 1 (se aplicará un recargo de $" + costoDeEnvio + ")\n\n-lo va a retirar en la tienda: presione 2");
+let envio2 = prompt("Si:\n\n-desea que le enviemos el producto a su domicilio: presione 1 (se aplicará un recargo de $" + costoDeEnvio + ")\n\n-lo va a retirar en la tienda: presione 2");
 
-switch (envio) {
+switch (envio2) {
     case "1":
         precioFinal.push(costoDeEnvio);
-        console.log(`El precio del envío es de $${costoDeEnvio}`);
         break;
     
     case "2":
@@ -96,61 +93,62 @@ switch (envio) {
 
 // Calculo la suma de todos los elementos del array precioFinal
 
-
 let total = precioFinal.reduce((a, b) => a + b, 0);
-
-console.log(`El total del carrito con ${carritoDeCompras.length} producto(s) es de: $${total}`);
-
-
 
 // Obtener el día de la semana real para aplicar descuentos
 
 const day = new Date();
-let diaDeLaSemana = day.getDay();
+let numDiaDeLaSemana = day.getDay();
+let diaDeLaSemana = "";
 
 let descuento = 0;
 
-switch (diaDeLaSemana) {
+switch (numDiaDeLaSemana) {
     case 0:
-        console.log("Hoy es Domingo, tiene un descuento del 10%");
+        diaDeLaSemana = "Domingo";
         descuento=10;
         break;
     case 1:
-        console.log("Hoy es Lunes, tiene un descuento del 8%");
+        diaDeLaSemana = "Lunes";
         descuento=8;
         break;
     case 2:
-        console.log("Hoy es Martes, tiene un descuento del 12%");
+        diaDeLaSemana = "Martes";
         descuento=12;
         break;
     case 3:
-        console.log("Hoy es Miércoles, tiene un descuento del 7%");
+        diaDeLaSemana = "Miércoles";
         descuento=7;
         break;
     case 4:
-        console.log("Hoy es Jueves, tiene un descuento del 15%");
+        diaDeLaSemana = "Jueves";
         descuento=15;
         break;
     case 5:
-        console.log("Hoy es Viernes, tiene un descuento del 5%");
+        diaDeLaSemana = "Viernes";
         descuento=5;
         break;
     case 6:
-        console.log("Hoy es Domingo, tiene un descuento del 18%");
+        diaDeLaSemana = "Sábado";
         descuento=18;
         break;
     
 };
 
+// Muestro el día y el porcentaje de descuento en la pantalla principal
+
+let diaDescuento = document.getElementById("descuentoDelDia");
+
+let muestroDia = document.createElement("div");
+
+muestroDia.innerHTML = `<h3 class="text-warning text-center"> ${diaDeLaSemana} </h3>
+<h3 class="text-success text-center"> ${descuento}% </h3>`
+
+diaDescuento.appendChild(muestroDia);
 
 // Calculo el precio nuevo aplicando el descuento
 
 let precioConDescuento = ((100-descuento)*total)/100;
-
-
-
-console.log(`El precio con el descuento aplicado es de $${precioConDescuento}`);
-
 
 //5- Determinar forma de pago
 
@@ -159,7 +157,7 @@ let formaDePago = prompt ("Indique la forma en la que desea pagar: \n" + "1-Efec
 let cuotas = 0;
 
 if (formaDePago==="1") {
-    console.log("Dirijase a caja para efectuar el pago");
+    
 }else if (formaDePago==="2") {
     cuotas=parseInt(prompt("Ingrese la cantidad de cuotas en las que desea pagar (Máximo 6)"));
 } else {
@@ -176,9 +174,9 @@ let redondeoCuota = (valorCuota (precioConDescuento, cuotas)).toFixed(2)
 
 if (formaDePago==="2") { 
     if((cuotas>0) && (cuotas<=6)) {
-        console.log(`Usted va a pagar ${cuotas} cuotas de $${redondeoCuota}`);
+        
     }else {
-        console.log("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
+        alert("Disculpe, algo salió mal durante el proceso, por favor recargue la página y vuelva a intentar la compra");
     } 
 }
 
@@ -216,7 +214,6 @@ arrayCodigos = Object.keys(verificarRepetidos);
 
 // Imprimo ticket de Compra
 
-console.log(`Ticket de compra\n\nUsted compró:\n`);
 
 for (let cantidad in verificarRepetidos) {
 
@@ -226,21 +223,77 @@ for (let cantidad in verificarRepetidos) {
 
     let traerProducto = carritoDeCompras.find((el) => el.codigo === obtengoCodigo);
 
-    console.log(
-        `${verificarRepetidos[cantidad]} ${traerProducto.nombre}(s) ${traerProducto.marca}`
-        );
+
+    //IMPRIMIR PRODUCTOS EN LA PÁGINA DEL CARRITO
+
+    let tablaProductos = document.getElementById("tablaResumen")
+
+    let fila = document.createElement("tr");
+
+    fila.innerHTML = `<td class="colCart alignCenter">${verificarRepetidos[cantidad]}</td>
+                        <td class="colCart">${traerProducto.nombre}(s), marca: ${traerProducto.marca} </td>
+                        <td class="colCart alignCenter">$${traerProducto.precio}</td>`
+
+    tablaProductos.appendChild(fila);
+
 };
 
+//agrego fila envio
 
-console.log(`El precio total de la compra es de $${precioConDescuento}`);
+switch (envio2) {
+    case "1":
+        let tablaProductos = document.getElementById("tablaResumen")
+
+        let fila = document.createElement("tr");
+    
+        fila.innerHTML = `<td></td>
+                            <td>Envío a Domicilio</td>
+                            <td class="colCart alignCenter">$${costoDeEnvio}</td>`
+    
+        tablaProductos.appendChild(fila);
+        break;
+}
+
+//agrego fila descuento
+    tablaProductos = document.getElementById("tablaResumen")
+
+    fila = document.createElement("tr");
+    let valorDescuento = total-precioConDescuento;
+    fila.innerHTML = `<td></td>
+                        <td>Descuento del día (${descuento}%)</td>
+                        <td class="colCart alignCenter">$-${valorDescuento}</td>`
+
+    tablaProductos.appendChild(fila);
+
+//agrego fila Precio Final
+tablaProductos = document.getElementById("tablaResumen")
+
+fila = document.createElement("tr");
+
+    fila.innerHTML = `<td></td>
+                        <td class="precioTotal">Precio Final</td>
+                        <td class="precioTotal colCart alignCenter">$${precioConDescuento}</td>`
+
+    tablaProductos.appendChild(fila);
+
+//agrego fila cuotas
+tablaProductos = document.getElementById("tablaResumen")
+
+fila = document.createElement("tr");
 
 if (formaDePago==="2") { 
     if((cuotas>0) && (cuotas<=6)) {
-        console.log(`Usted va a pagar ${cuotas} cuotas de $${redondeoCuota}`);
-        console.log("¡Gracias por su compra!");
+        fila.innerHTML = `<td class="pagoEnCuotas colCart alignCenter">${cuotas}</td>
+                        <td class="pagoEnCuotas">Cuotas</td>
+                        <td class="pagoEnCuotas colCart alignCenter">$${redondeoCuota}</td>`
     }
 } else if (formaDePago==="1") {
-    console.log(`Usted va a pagar en efectivo por caja`);
-    console.log("¡Gracias por su compra!");
+    fila.innerHTML = `<td></td>
+                        <td class="precioTotal">Pago en Efectivo o Débito</td>
+                        <td></td>`
 };
+
+tablaProductos.appendChild(fila);
+
+
 

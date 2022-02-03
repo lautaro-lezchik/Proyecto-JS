@@ -1,21 +1,39 @@
 // ESTILO GENERAL
 
 * {
-    background-color: lightblue;
-
+    background-color:white;
+    margin: 0;
+    padding: 0;
 }
 
+//HERO SECTION
+//TITULO PRINCIPAL
 .titulo {
     text-align: center;
     font-family: 'Lora', serif;
     color: orange;
-    margin-top: 200px;
+
 }
 
 .tituloResaltado {
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
-.instrucciones {
-    margin:50px 30%;
+.tituloResumen {
+    text-align: center;
+    font-family: 'Lora', serif;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    border-top: 2px solid gray;
+    padding-top: 20px;
 }
+
+// DESCUENTO DEL DIA
+
+.descuentoDelDia {
+    border: 2px solid blue;
+    //border-radius: 15%;
+    margin: 10px 20px 0 0;
+}
+
+
