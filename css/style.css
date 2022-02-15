@@ -1,0 +1,61 @@
+.grillaProductos {
+  display: grid;
+  gap: 1rem; }
+
+.tarjetaProductos {
+  border: 1px solid gray;
+  justify-content: center;
+  margin: 10px 20px;
+  border-radius: 30px;
+  display: grid;
+  text-align: center; }
+
+.tarjetaProductos img {
+  justify-self: center;
+  height: 200px;
+  object-position: center;
+  width: 200px; }
+
+.addToCartButton {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  background-color: blue;
+  color: #fff; }
+
+.addToCartButton:hover {
+  transform: scale(1.05);
+  transition-duration: .5s; }
+
+.tarjetaProductosCart {
+  margin: 10px auto;
+  border: 1px solid gray;
+  display: grid;
+  grid-template-columns: 2fr 5fr 1fr 2fr 2fr;
+  grid-gap: 10px;
+  width: 70%; }
+
+.imgProductosCarrito {
+  justify-self: center;
+  height: 200px;
+  object-position: center;
+  width: 200px; }
+
+.contenedorNombreMarca {
+  align-self: center; }
+
+.contenedorCantidad {
+  align-self: center; }
+
+.contenedorPrecio {
+  align-self: center;
+  color: blue;
+  font-weight: 600; }
+
+.contenedorDelete {
+  align-self: center; }
+
+.delProductoButton {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  background-color: red;
+  color: #fff; }
